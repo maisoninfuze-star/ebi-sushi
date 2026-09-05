@@ -39,12 +39,11 @@ export function OptimizedImage({
           {...(decorative ? { "aria-hidden": true } : { role: "img", "aria-label": alt })}
           className="absolute inset-0 flex items-center justify-center bg-carbon"
         >
+          {/* Glyphe décoratif rendu en pseudo-élément : hors du texte de la page. */}
           <span
             aria-hidden
-            className="select-none font-display text-[clamp(1.5rem,26cqmin,4rem)] font-light leading-none text-ivory/12"
-          >
-            海老
-          </span>
+            className="select-none font-display text-[clamp(1.5rem,26cqmin,4rem)] font-light leading-none text-ivory/12 before:content-['海老']"
+          />
         </div>
       ) : (
         <Image

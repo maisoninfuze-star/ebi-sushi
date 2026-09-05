@@ -153,23 +153,22 @@ export function Hero() {
         <h1 className="mt-4 font-display font-light uppercase leading-[0.86] tracking-[0.06em] text-ivory lg:mt-8">
           <span className="sr-only">Ebi Sushi — {t.title}</span>
           <span aria-hidden className="block">
+            {/* Élément le plus grand de l'écran : il reste peint en permanence
+                (pas de fondu ni de masque) et ne fait que se poser — le LCP
+                n'attend pas la fin de l'intro. */}
             {t.wordmark.map((line, i) => (
-              <span
+              <motion.span
                 key={line}
-                className="block overflow-hidden pb-[0.08em] pt-[0.1em] -mt-[0.1em] -mb-[0.08em]"
+                className={cn(
+                  "block text-[clamp(3.25rem,15vw,6rem)] lg:text-[clamp(6rem,11.5vw,13.5rem)]",
+                  i === 1 && "text-champagne",
+                )}
+                initial={reduced ? undefined : { y: 28 }}
+                animate={!play ? undefined : { y: 0 }}
+                transition={{ duration: 1.1, delay: 0.1 + i * 0.1, ease: EASE }}
               >
-                <motion.span
-                  className={cn(
-                    "block text-[clamp(3.25rem,15vw,6rem)] lg:text-[clamp(6rem,11.5vw,13.5rem)]",
-                    i === 1 && "text-champagne",
-                  )}
-                  initial={reduced ? undefined : { y: "104%" }}
-                  animate={!play ? undefined : { y: 0 }}
-                  transition={{ duration: 1.1, delay: 0.45 + i * 0.12, ease: EASE }}
-                >
-                  {line}
-                </motion.span>
-              </span>
+                {line}
+              </motion.span>
             ))}
           </span>
         </h1>
@@ -213,9 +212,9 @@ export function Hero() {
         <motion.div
           ref={emblaRef}
           className="w-full shrink-0 overflow-hidden"
-          initial={reduced ? undefined : { opacity: 0, y: 28 }}
-          animate={!play ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 1.1, delay: 0.55, ease: EASE }}
+          initial={reduced ? undefined : { y: 32 }}
+          animate={!play ? undefined : { y: 0 }}
+          transition={{ duration: 1.1, delay: 0.2, ease: EASE }}
         >
           <div className="flex touch-pan-y">
             {slides.map(({ item, image, alt }, i) => {

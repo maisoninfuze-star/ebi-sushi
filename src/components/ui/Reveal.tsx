@@ -60,6 +60,22 @@ export function RevealText({
 
   if (reduced) return <Tag className={className}>{text}</Tag>;
 
+  // Le titre principal est souvent l'élément le plus grand de l'écran : un
+  // texte masqué n'est pas « peint » et repousserait le LCP. Il se pose sans masque.
+  if (Tag === "h1") {
+    return (
+      <motion.h1
+        className={className}
+        initial={{ y: 22 }}
+        whileInView={{ y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {text}
+      </motion.h1>
+    );
+  }
+
   return (
     <Tag className={className}>
       {/* Le texte complet reste accessible ; la version animée est décorative. */}

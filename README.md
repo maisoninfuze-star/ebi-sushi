@@ -132,6 +132,9 @@ sélecteur de langue de l'en-tête affiche les langues non publiées comme
 * La carte compte 214 plats : chaque catégorie ne monte ses cartes qu'à
   l'approche du viewport, avec squelettes de chargement.
 * Polices chargées via `next/font` (aucun appel réseau tiers).
+* Mouvement compatible LCP : les plus grands éléments d'un écran (nom de marque,
+  carte du hero, titre de page) sont peints dès la première image et ne font que
+  se poser ; seuls les petits éléments s'estompent.
 * Intro logo à l'ouverture (`src/components/layout/Intro.tsx`) : jouée une fois
   par session, passable d'un clic ou d'une touche, absente si le système demande
   moins d'animations ; le hero n'anime son entrée qu'à la levée du rideau.
