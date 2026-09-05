@@ -7,6 +7,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { m } from "motion/react";
 
 import { OptimizedImage } from "@/components/ui/OptimizedImage";
+import { HeroStaticImage } from "@/components/home/HeroStaticImage";
 import { Button } from "@/components/ui/Button";
 import { IconChevronLeft, IconChevronRight, IconPause, IconPlay } from "@/components/ui/Icons";
 import { heroSlides, heroCarousel, heroBackdrops } from "@/data/hero";
@@ -100,17 +101,15 @@ export function Hero() {
     >
       {/* ── Fond du panneau carrousel (plein écran sur mobile, moitié gauche au-delà) ── */}
       <div aria-hidden className="absolute inset-0 lg:right-1/2">
-        <OptimizedImage
-          src={heroBackdrops.left.src}
-          alt=""
-          fill
-          priority
-          fetchPriority="high"
-          instant
-          quality={58}
+        {/* Fond servi en statique pré-optimisé : compté dans le LCP sur mobile. */}
+        <HeroStaticImage
+          name="fond-mobile"
+          widths={[420, 640, 840]}
+          fallback={heroBackdrops.left.src}
           sizes="(min-width: 1024px) 50vw, 100vw"
-          wrapperClassName="size-full"
-          className="object-cover object-center opacity-55 lg:opacity-60"
+          alt=""
+          decorative
+          className="object-center opacity-55 lg:opacity-60"
         />
         {/* Le fond doit rester en retrait : la carte porte la lumière. */}
         <div className="absolute inset-0 bg-ink/55" />
@@ -243,18 +242,27 @@ export function Hero() {
                     />
 
                     <div className="absolute inset-0 -translate-x-2.5 translate-y-2.5 overflow-hidden rounded-[0_2.5rem_0_2.5rem] bg-charcoal shadow-[0_0_10px_rgba(0,0,0,0.5)] lg:rounded-[0_5rem_0_5rem]">
-                      <OptimizedImage
-                        src={image}
-                        alt={alt}
-                        fill
-                        priority={i === 0}
-                        fetchPriority={i === 0 ? "high" : undefined}
-                        instant={i === 0}
-                        quality={72}
-                        sizes="(min-width: 1024px) 24rem, 72vw"
-                        wrapperClassName="size-full"
-                        className="object-cover object-top"
-                      />
+                      {i === 0 ? (
+                        // Première carte : l'élément le plus grand de l'écran, servi en statique.
+                        <HeroStaticImage
+                          name="carte-1"
+                          widths={[320, 480, 640, 800]}
+                          fallback={image}
+                          sizes="(min-width: 1024px) 24rem, 72vw"
+                          alt={alt}
+                          className="object-top"
+                        />
+                      ) : (
+                        <OptimizedImage
+                          src={image}
+                          alt={alt}
+                          fill
+                          quality={72}
+                          sizes="(min-width: 1024px) 24rem, 72vw"
+                          wrapperClassName="size-full"
+                          className="object-cover object-top"
+                        />
+                      )}
 
                       {/* Voile bas : la légende et le bouton restent lisibles sur toute photo. */}
                       <div

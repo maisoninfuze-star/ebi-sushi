@@ -9,7 +9,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "images": "node scripts/generate-images.mjs",
-    "images:optimize": "node scripts/optimize-images.mjs"
+    "images:optimize": "node scripts/optimize-images.mjs && node scripts/build-hero-assets.mjs"
   },
   "dependencies": {
     "embla-carousel-autoplay": "^8.6.0",

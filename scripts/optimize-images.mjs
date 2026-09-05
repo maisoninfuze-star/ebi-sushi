@@ -22,6 +22,7 @@ function maxWidthFor(name) {
 }
 
 const files = (await readdir(DIR)).filter((f) => /\.(jpe?g|png)$/i.test(f));
+// Les dérivés de public/images/hero sont produits par build-hero-assets.mjs.
 let before = 0;
 let after = 0;
 
