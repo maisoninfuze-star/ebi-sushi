@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SYSTÈME VISUEL EBI SUSHI
+   Encre japonaise, ivoire chaud, vermillon et champagne — utilisés avec
+   parcimonie. La photographie et l'espace portent l'essentiel du discours.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* Couleurs de marque */
+  --color-ink: #090909;
+  --color-charcoal: #141414;
+  --color-carbon: #1b1b1b;
+  --color-ivory: #f4f0e8;
+  --color-vermilion: #d94b3d;
+  --color-salmon: #e98a78;
+  --color-champagne: #c6a66a;
+  --color-ash: #a8a39b;
+
+  /* Typographie */
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Courbes d'animation */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Rythme vertical des sections */
+  --spacing-section: 7.5rem;
+}
+
+/* ── Bases ────────────────────────────────────────────────────────────────── */
+
+@layer base {
+  * {
+    min-width: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Compense l'en-tête fixe lors des sauts d'ancre. */
+    scroll-padding-top: 6rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-ivory);
+    font-family: var(--font-sans);
+    font-feature-settings: "kern", "liga", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* Aucun débordement horizontal possible, quelle que soit la largeur. */
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: var(--color-vermilion);
+    color: var(--color-ivory);
+  }
+
+  /* Un anneau de focus visible et lisible sur fond sombre. */
+  :focus-visible {
+    outline: 2px solid var(--color-champagne);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Champs de formulaire : neutralise les styles natifs iOS. */
+  input, select, textarea, button {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+  }
+
+  input, select, textarea {
+    appearance: none;
+    border-radius: 0;
+  }
+
+  /* Empêche le zoom automatique iOS sur les champs (< 16px). */
+  @supports (-webkit-touch-callout: none) {
+    input, select, textarea {
+      font-size: max(16px, 1em);
+    }
+  }
+
+  img {
+    /* Sécurité : aucune image ne peut faire déborder son conteneur. */
+    max-width: 100%;
+  }
+}
+
+/* ── Utilitaires ──────────────────────────────────────────────────────────── */
+
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 90rem;
+  padding-inline: 1.25rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2.5rem;
+  }
+  @media (width >= 90rem) {
+    padding-inline: 4rem;
+  }
+}
+
+/** Micro-libellé en capitales espacées — la signature typographique du site. */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-champagne);
+}
+
+@utility hairline {
+  border-color: color-mix(in srgb, var(--color-ivory) 12%, transparent);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/** Réserve la zone sûre des téléphones à encoche. */
+@utility pb-safe {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+@utility h-safe-bar {
+  height: calc(4.25rem + env(safe-area-inset-bottom));
+}
+
+/* ── Animations ───────────────────────────────────────────────────────────── */
+
+@keyframes ebi-fade-up {
+  from { opacity: 0; transform: translate3d(0, 1.25rem, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes ebi-drift {
+  0%, 100% { transform: scale(1.06) translate3d(0, 0, 0); }
+  50% { transform: scale(1.12) translate3d(-1.5%, -1%, 0); }
+}
+
+@keyframes ebi-shimmer {
+  from { background-position: -160% 0; }
+  to { background-position: 260% 0; }
+}
+
+/** Squelette de chargement de la carte. */
+@utility skeleton {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-charcoal) 30%,
+    color-mix(in srgb, var(--color-ivory) 6%, var(--color-charcoal)) 48%,
+    var(--color-charcoal) 66%
+  );
+  background-size: 220% 100%;
+  animation: ebi-shimmer 1.6s linear infinite;
+}
+
+/* ── Intro (animation du logo à l'ouverture) ──────────────────────────────── */
+
+/* Le script inline de <head> pose l'attribut avant le premier rendu : aucun
+   éclair d'écran noir sur les pages suivantes de la même session. */
+html[data-intro="seen"] [data-intro-overlay] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-intro-overlay] {
+    display: none;
+  }
+}
+
+/* ── Accessibilité : mouvement réduit ─────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
