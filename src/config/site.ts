@@ -3,8 +3,37 @@
  * Le contenu éditorial se trouve dans src/i18n/fr.ts.
  */
 
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://ebisushi.ma"; // TODO — domaine définitif.
+/**
+ * URL publique du site, toujours valide.
+ *
+ * Ordre : NEXT_PUBLIC_SITE_URL (domaine définitif — TODO à renseigner), puis
+ * les variables fournies par Vercel (domaine de production, puis URL du
+ * déploiement), puis le domaine par défaut. Une variable vide ou mal formée est
+ * ignorée au lieu de faire échouer le build (`new URL("")`), et un domaine nu
+ * comme « ebisushi.ma » reçoit son protocole.
+ */
+function resolveSiteUrl(): string {
+  const candidates = [
+    process.env.NEXT_PUBLIC_SITE_URL,
+    process.env.VERCEL_PROJECT_PRODUCTION_URL,
+    process.env.VERCEL_URL,
+  ];
+
+  for (const raw of candidates) {
+    const value = raw?.trim();
+    if (!value) continue;
+    const withScheme = /^https?:\/\//i.test(value) ? value : `https://${value}`;
+    try {
+      return new URL(withScheme).origin;
+    } catch {
+      // Valeur illisible : on passe au candidat suivant.
+    }
+  }
+
+  return "https://ebisushi.ma"; // TODO — domaine définitif.
+}
+
+export const SITE_URL = resolveSiteUrl();
 
 /**
  * Préparation i18n : ajouter une langue = ajouter une entrée ici et un
