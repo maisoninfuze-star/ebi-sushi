@@ -4,11 +4,11 @@ import { LazyMotion } from "motion/react";
 import type { ReactNode } from "react";
 
 /**
- * Les fonctionnalités d'animation (fondu, entrée au défilement, survol, sortie)
- * sont chargées après l'hydratation, dans leur propre fragment : le bundle
- * initial ne porte que le composant « m », bien plus léger que « motion ».
- * Les éléments les plus grands restant peints dès le départ (voir README),
- * ce différé n'affecte pas le LCP.
+ * Composant « m » + LazyMotion limité à `domAnimation` (fondu, entrée au
+ * défilement, survol, sortie) : les fonctionnalités inutilisées (drag, layout)
+ * ne sont pas activées. Le chargement différé des fonctionnalités n'a pas
+ * réduit le bundle initial mesuré (le module est déjà importé ailleurs) ; il
+ * reste inoffensif et prêt si les imports statiques sont un jour allégés.
  */
 const loadFeatures = () => import("motion/react").then((mod) => mod.domAnimation);
 

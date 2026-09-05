@@ -132,8 +132,8 @@ sélecteur de langue de l'en-tête affiche les langues non publiées comme
 * La carte compte 214 plats : chaque catégorie ne monte ses cartes qu'à
   l'approche du viewport, avec squelettes de chargement.
 * Polices chargées via `next/font` (aucun appel réseau tiers).
-* Animations Motion via le composant `m` et `LazyMotion` : les fonctionnalités
-  d'animation arrivent après l'hydratation, hors du bundle initial.
+* Animations Motion via le composant `m` et `LazyMotion` (fonctionnalités
+  `domAnimation` uniquement : ni drag ni layout).
 * Mouvement compatible LCP : les plus grands éléments d'un écran (nom de marque,
   carte du hero, titre de page) sont peints dès la première image et ne font que
   se poser ; seuls les petits éléments s'estompent.
@@ -147,6 +147,17 @@ sélecteur de langue de l'en-tête affiche les langues non publiées comme
   texte — jamais la couleur seule.
 
 ---
+
+## Mesures mobiles (Lighthouse 13, build de production, 5 septembre 2026)
+
+| Page    | Performance | Accessibilité | Bonnes pratiques | SEO | LCP   | TBT    | CLS |
+| ------- | ----------- | ------------- | ---------------- | --- | ----- | ------ | --- |
+| `/`     | 91          | 100           | 100              | 100 | 3,4 s | 30 ms  | 0   |
+| `/menu` | ≈ 82        | 100           | 100              | 100 | ≈ 4 s | 220 ms | 0   |
+
+Le LCP simulé reste borné par le JavaScript du framework (≈ 265 Ko gzip, dont
+React et le runtime Next) : dans la trace réelle, l'image du hero est peinte à
+142 ms. La carte porte 214 plats ; ses cartes se montent à la demande.
 
 ## ⚠️ À compléter par le restaurant
 

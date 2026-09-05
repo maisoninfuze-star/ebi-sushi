@@ -34,11 +34,14 @@ function CategorySection({
   items,
   onOpen,
   eager,
+  fullSkeleton,
 }: {
   categoryId: string;
   items: MenuItem[];
   onOpen: (item: MenuItem) => void;
   eager: boolean;
+  /** Réserve la hauteur exacte de la grille (nécessaire aux liens profonds). */
+  fullSkeleton: boolean;
 }) {
   const ref = useRef<HTMLElement>(null);
   const [mounted, setMounted] = useState(eager);
@@ -96,10 +99,11 @@ function CategorySection({
             ))}
           </ul>
         ) : (
-          // Autant de squelettes que de plats : la section occupe déjà sa hauteur
-          // finale, et un lien profond vers une catégorie plus bas ne dérive pas
-          // quand les sections du dessus montent leurs cartes.
-          <MenuSkeleton count={items.length} />
+          // Avec un lien profond, autant de squelettes que de plats : la section
+          // occupe déjà sa hauteur finale et la cible ne dérive pas quand les
+          // sections du dessus montent leurs cartes. Sinon, six suffisent — le
+          // HTML et l'hydratation restent légers sur mobile.
+          <MenuSkeleton count={fullSkeleton ? items.length : Math.min(items.length, 6)} />
         )}
       </div>
     </section>
@@ -268,6 +272,7 @@ export function MenuExperience() {
               items={results.filter((item) => item.category === category.id)}
               onOpen={setSelected}
               eager={i < 2 || category.id === anchoredCategory}
+              fullSkeleton={anchoredCategory !== null}
             />
           ))
         )}
