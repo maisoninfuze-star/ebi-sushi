@@ -14,7 +14,7 @@ const base =
   "ease-[var(--ease-out-quint)] disabled:pointer-events-none disabled:opacity-45";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-vermilion text-ivory hover:bg-[#c33f32]",
+  primary: "bg-vermilion text-ivory hover:bg-[#b43023]",
   outline: "border border-ivory/25 text-ivory hover:border-ivory/70 hover:bg-ivory/[0.04]",
   ghost: "border border-champagne/40 text-champagne hover:bg-champagne/10",
   quiet: "text-ivory/70 hover:text-ivory",

@@ -147,7 +147,7 @@ export function Footer() {
 
         {/* Bas de page */}
         <div className="mt-16 flex flex-col gap-5 border-t border-ivory/[0.08] pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-sans text-xs text-ash/70">
+          <p className="font-sans text-xs text-ash">
             © {year} {business.name}. {dict.footer.rights}
           </p>
 
@@ -156,12 +156,12 @@ export function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="inline-block py-1 font-sans text-xs text-ash/70 transition-colors duration-300 hover:text-ivory"
+                className="inline-block py-1 font-sans text-xs text-ash transition-colors duration-300 hover:text-ivory"
               >
                 {link.label}
               </Link>
             ))}
-            <span className="font-sans text-xs text-ash/40">{business.credit.label}</span>
+            <span className="font-sans text-xs text-ash/80">{business.credit.label}</span>
           </div>
         </div>
       </div>

@@ -281,7 +281,7 @@ export function ReservationForm({ compact = false }: { compact?: boolean }) {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="flex min-h-14 w-full items-center justify-center gap-2.5 bg-vermilion font-sans text-[0.75rem] font-medium uppercase tracking-[0.18em] text-ivory transition-colors duration-500 hover:bg-[#c33f32] disabled:opacity-60 sm:w-auto sm:px-12"
+          className="flex min-h-14 w-full items-center justify-center gap-2.5 bg-vermilion font-sans text-[0.75rem] font-medium uppercase tracking-[0.18em] text-ivory transition-colors duration-500 hover:bg-[#b43023] disabled:opacity-60 sm:w-auto sm:px-12"
         >
           <IconWhatsApp className="size-4" />
           {status === "submitting" ? f.submitting : f.submit}

@@ -123,7 +123,7 @@ export function LocationSection({ className }: { className?: string }) {
                 </a>
                 <Link
                   href="/reservation"
-                  className="flex min-h-[3.25rem] flex-col items-center justify-center gap-1.5 bg-vermilion px-2 text-center font-sans text-[0.625rem] font-medium uppercase tracking-[0.14em] text-ivory transition-colors duration-500 hover:bg-[#c33f32]"
+                  className="flex min-h-[3.25rem] flex-col items-center justify-center gap-1.5 bg-vermilion px-2 text-center font-sans text-[0.625rem] font-medium uppercase tracking-[0.14em] text-ivory transition-colors duration-500 hover:bg-[#b43023]"
                 >
                   <IconClock className="size-4" />
                   {dict.location.reserve}

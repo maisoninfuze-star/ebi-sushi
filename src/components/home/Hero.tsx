@@ -106,7 +106,7 @@ export function Hero() {
           fill
           priority
           instant
-          quality={70}
+          quality={58}
           sizes="(min-width: 1024px) 50vw, 100vw"
           wrapperClassName="size-full"
           className="object-cover object-center opacity-55 lg:opacity-60"
@@ -217,12 +217,12 @@ export function Hero() {
           animate={!play ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 0.55, ease: EASE }}
         >
-          <ul className="flex touch-pan-y">
+          <div className="flex touch-pan-y">
             {slides.map(({ item, image, alt }, i) => {
               const pieces = piecesOf(item);
               const active = i === selected;
               return (
-                <li
+                <div
                   key={item.id}
                   role="group"
                   aria-roledescription="diapositive"
@@ -249,7 +249,7 @@ export function Hero() {
                         fill
                         priority={i === 0}
                         instant={i === 0}
-                        quality={78}
+                        quality={72}
                         sizes="(min-width: 1024px) 24rem, 72vw"
                         wrapperClassName="size-full"
                         className="object-cover object-top"
@@ -288,10 +288,10 @@ export function Hero() {
                       </div>
                     </div>
                   </div>
-                </li>
+                </div>
               );
             })}
-          </ul>
+          </div>
         </motion.div>
 
         {/* Flèches — aux bords du panneau, à mi-hauteur */}

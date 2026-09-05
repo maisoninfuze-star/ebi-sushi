@@ -8,7 +8,13 @@ import { motion, AnimatePresence } from "motion/react";
 import { Logo } from "@/components/ui/Logo";
 import { IconCart, IconMenu } from "@/components/ui/Icons";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
-import { MobileNavigation } from "@/components/layout/MobileNavigation";
+import dynamic from "next/dynamic";
+
+// Le menu mobile plein écran n'est chargé qu'à sa première ouverture.
+const MobileNavigation = dynamic(
+  () => import("@/components/layout/MobileNavigation").then((m) => m.MobileNavigation),
+  { ssr: false },
+);
 import { useCart } from "@/components/cart/CartProvider";
 import { mainNav } from "@/config/site";
 import { dict } from "@/i18n/fr";
@@ -67,9 +73,9 @@ export function Header() {
             <Link
               href="/"
               className="shrink-0 transition-opacity duration-300 hover:opacity-80"
-              aria-label="Ebi Sushi — retour à l'accueil"
             >
               <Logo size={solid ? "sm" : "md"} />
+              <span className="sr-only"> — accueil</span>
             </Link>
 
             {/* Navigation principale */}
@@ -134,7 +140,7 @@ export function Header() {
 
               <Link
                 href="/menu"
-                className="hidden min-h-11 items-center bg-vermilion px-6 font-sans text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-ivory transition-colors duration-500 hover:bg-[#c33f32] sm:inline-flex"
+                className="hidden min-h-11 items-center bg-vermilion px-6 font-sans text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-ivory transition-colors duration-500 hover:bg-[#b43023] sm:inline-flex"
               >
                 {dict.nav.order}
               </Link>

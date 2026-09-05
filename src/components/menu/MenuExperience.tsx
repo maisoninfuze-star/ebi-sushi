@@ -5,7 +5,13 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MenuCategoryNav } from "@/components/menu/MenuCategoryNav";
 import { MenuFilters, type FilterKey } from "@/components/menu/MenuFilters";
 import { MenuItemCard } from "@/components/menu/MenuItemCard";
-import { MenuItemModal } from "@/components/menu/MenuItemModal";
+import dynamic from "next/dynamic";
+
+// La fiche plat n'est chargée qu'au premier clic.
+const MenuItemModal = dynamic(
+  () => import("@/components/menu/MenuItemModal").then((m) => m.MenuItemModal),
+  { ssr: false },
+);
 import { MenuSkeleton } from "@/components/menu/MenuSkeleton";
 import { availableItems, visibleCategories, getCategory, type MenuItem } from "@/data/menu";
 import { dict } from "@/i18n/fr";

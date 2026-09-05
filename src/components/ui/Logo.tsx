@@ -33,6 +33,8 @@ export function Logo({
         )}
       >
         EBI
+        {/* Espace lu par les lecteurs d'écran : « EBI Sushi », pas « EBISushi ». */}
+        <span className="sr-only"> </span>
       </span>
       <span className="flex w-full items-center gap-[0.4em]">
         <span aria-hidden className="h-px flex-1 bg-champagne/45" />

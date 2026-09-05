@@ -226,7 +226,7 @@ export function IntroOverlay() {
           </motion.div>
 
           <motion.span
-            className="absolute bottom-8 font-sans text-[0.5625rem] uppercase tracking-[0.28em] text-ivory/35"
+            className="absolute bottom-8 font-sans text-[0.5625rem] uppercase tracking-[0.28em] text-ash"
             initial={{ opacity: 0 }}
             animate={{ opacity: effective === "exit" ? 0 : 1 }}
             transition={{ duration: 0.6, delay: effective === "exit" ? 0 : 1.2 }}

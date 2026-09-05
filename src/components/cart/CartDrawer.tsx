@@ -157,7 +157,7 @@ export function CartDrawer() {
                 <Link
                   href="/menu"
                   onClick={close}
-                  className="mt-2 inline-flex min-h-12 items-center bg-vermilion px-7 font-sans text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-ivory transition-colors hover:bg-[#c33f32]"
+                  className="mt-2 inline-flex min-h-12 items-center bg-vermilion px-7 font-sans text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-ivory transition-colors hover:bg-[#b43023]"
                 >
                   {dict.cart.empty.cta}
                 </Link>
@@ -248,7 +248,7 @@ export function CartDrawer() {
                   <button
                     type="button"
                     onClick={() => setStep("checkout")}
-                    className="mt-5 flex min-h-14 w-full items-center justify-center bg-vermilion font-sans text-[0.75rem] font-medium uppercase tracking-[0.18em] text-ivory transition-colors hover:bg-[#c33f32]"
+                    className="mt-5 flex min-h-14 w-full items-center justify-center bg-vermilion font-sans text-[0.75rem] font-medium uppercase tracking-[0.18em] text-ivory transition-colors hover:bg-[#b43023]"
                   >
                     {dict.cart.checkout}
                   </button>
@@ -350,7 +350,7 @@ export function CartDrawer() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="mt-4 flex min-h-14 w-full items-center justify-center gap-2.5 bg-vermilion font-sans text-[0.75rem] font-medium uppercase tracking-[0.18em] text-ivory transition-colors hover:bg-[#c33f32] disabled:opacity-60"
+                    className="mt-4 flex min-h-14 w-full items-center justify-center gap-2.5 bg-vermilion font-sans text-[0.75rem] font-medium uppercase tracking-[0.18em] text-ivory transition-colors hover:bg-[#b43023] disabled:opacity-60"
                   >
                     <IconWhatsApp className="size-4" />
                     {submitting ? dict.cart.sending : dict.cart.send}

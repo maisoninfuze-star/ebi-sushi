@@ -3,7 +3,7 @@ import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
 
 import { CartProvider } from "@/components/cart/CartProvider";
-import { CartDrawer } from "@/components/cart/CartDrawer";
+import { CartDrawerLazy } from "@/components/cart/CartDrawerLazy";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileOrderBar } from "@/components/layout/MobileOrderBar";
@@ -110,7 +110,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main id="contenu">{children}</main>
             <Footer />
             <MobileOrderBar />
-            <CartDrawer />
+            <CartDrawerLazy />
           </CartProvider>
           <IntroOverlay />
         </IntroProvider>

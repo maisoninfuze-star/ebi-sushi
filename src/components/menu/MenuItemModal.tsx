@@ -127,7 +127,7 @@ function ItemPanel({ item, onClose }: { item: MenuItem; onClose: () => void }) {
         <button
           type="button"
           onClick={confirm}
-          className="flex min-h-12 flex-1 items-center justify-center bg-vermilion px-4 font-sans text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-ivory transition-colors hover:bg-[#c33f32]"
+          className="flex min-h-12 flex-1 items-center justify-center bg-vermilion px-4 font-sans text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-ivory transition-colors hover:bg-[#b43023]"
         >
           {dict.menu.addWithPrice(formatPrice(item.price * quantity))}
         </button>

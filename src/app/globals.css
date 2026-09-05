@@ -12,7 +12,8 @@
   --color-charcoal: #141414;
   --color-carbon: #1b1b1b;
   --color-ivory: #f4f0e8;
-  --color-vermilion: #d94b3d;
+  /* Nuance calée pour 4,5:1 avec l'ivoire : les boutons passent le niveau AA. */
+  --color-vermilion: #c93627;
   --color-salmon: #e98a78;
   --color-champagne: #c6a66a;
   --color-ash: #a8a39b;

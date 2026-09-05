@@ -66,7 +66,7 @@ export function SignatureDishes() {
 
         <p
           aria-hidden
-          className="mt-6 text-center font-sans text-[0.625rem] uppercase tracking-[0.2em] text-ash/50 lg:hidden"
+          className="mt-6 text-center font-sans text-[0.625rem] uppercase tracking-[0.2em] text-ash lg:hidden"
         >
           {dict.signatures.swipeHint}
         </p>
