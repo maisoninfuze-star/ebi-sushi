@@ -182,6 +182,42 @@
 
 /* ── Intro (animation du logo à l'ouverture) ──────────────────────────────── */
 
+/* L'entrée est animée en CSS pur : elle démarre à la première image, sans
+   attendre l'hydratation — sur un téléphone lent, le logo apparaît tout de
+   suite et le LCP n'est pas repoussé. Les lettres partent d'une opacité non
+   nulle pour être comptées comme peintes dès le départ. */
+@keyframes intro-rise {
+  from { opacity: 0.2; transform: translate3d(0, 0.35em, 0); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes intro-rule {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes intro-settle {
+  from { opacity: 0; letter-spacing: 0.9em; }
+  to { opacity: 1; letter-spacing: 0.45em; }
+}
+@keyframes intro-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.intro-letter {
+  animation: intro-rise 1s var(--ease-out-expo) both;
+  animation-delay: calc(0.2s + var(--i, 0) * 0.09s);
+}
+.intro-rule {
+  animation: intro-rule 0.9s var(--ease-out-expo) 0.65s both;
+}
+.intro-sub {
+  animation: intro-settle 1s var(--ease-out-expo) 0.75s both;
+}
+.intro-fade {
+  animation: intro-fade 0.8s var(--ease-out-expo) both;
+  animation-delay: var(--d, 1s);
+}
+
 /* Le script inline de <head> pose l'attribut avant le premier rendu : aucun
    éclair d'écran noir sur les pages suivantes de la même session. */
 html[data-intro="seen"] [data-intro-overlay] {

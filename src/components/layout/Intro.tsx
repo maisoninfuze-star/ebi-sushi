@@ -13,6 +13,8 @@ import {
 } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
+import { cn } from "@/lib/utils";
+
 import { dict } from "@/i18n/fr";
 import { useScrollLock } from "@/lib/hooks";
 import { INTRO_STORAGE_KEY } from "@/lib/intro";
@@ -118,7 +120,11 @@ export function IntroOverlay() {
   // le site n'est jamais bloqué derrière l'intro.
   useEffect(() => {
     if (effective !== "play") return;
-    const delay = window.matchMedia("(max-width: 767px)").matches ? CURTAIN_AT_MOBILE : CURTAIN_AT;
+    const target = window.matchMedia("(max-width: 767px)").matches ? CURTAIN_AT_MOBILE : CURTAIN_AT;
+    // Calé sur le début du chargement de la page, pas sur l'hydratation : sur un
+    // appareil lent, le rideau se lève dès que React est prêt.
+    const elapsed = performance.now();
+    const delay = Math.max(300, target - elapsed);
     const toExit = window.setTimeout(() => {
       markReady();
       setTimed("exit");
@@ -174,65 +180,45 @@ export function IntroOverlay() {
             animate={effective === "exit" ? { opacity: 0, y: -24 } : { opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: EASE_OUT }}
           >
-            {/* E · B · I — chaque lettre monte derrière son propre masque. */}
-            <span className="flex overflow-hidden pb-[0.06em] pt-[0.1em] font-display text-[clamp(4.5rem,14vw,8.5rem)] font-light leading-none tracking-[0.22em] text-ivory">
+            {/* E · B · I — entrée en CSS : visible dès la première image. */}
+            <span className="flex font-display text-[clamp(4.5rem,14vw,8.5rem)] font-light leading-none tracking-[0.22em] text-ivory">
               {letters.map((letter, i) => (
-                <motion.span
+                <span
                   key={letter}
-                  className="inline-block"
-                  initial={{ y: "110%", opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 1, delay: 0.25 + i * 0.09, ease: EASE_OUT }}
+                  className="intro-letter inline-block"
+                  style={{ "--i": i } as React.CSSProperties}
                 >
                   {letter}
-                </motion.span>
+                </span>
               ))}
             </span>
 
             {/* Filet et « Sushi » : le lockup du logo, à grande échelle. */}
             <span className="mt-4 flex w-full items-center gap-4">
-              <motion.span
-                aria-hidden
-                className="h-px flex-1 origin-right bg-champagne/60"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.9, delay: 0.75, ease: EASE_OUT }}
-              />
-              <motion.span
-                className="font-sans text-[0.7rem] font-medium uppercase text-champagne sm:text-xs"
-                initial={{ opacity: 0, letterSpacing: "0.9em" }}
-                animate={{ opacity: 1, letterSpacing: "0.45em" }}
-                transition={{ duration: 1, delay: 0.85, ease: EASE_OUT }}
-              >
+              <span aria-hidden className="intro-rule h-px flex-1 origin-right bg-champagne/60" />
+              <span className="intro-sub font-sans text-[0.7rem] font-medium uppercase text-champagne sm:text-xs">
                 Sushi
-              </motion.span>
-              <motion.span
-                aria-hidden
-                className="h-px flex-1 origin-left bg-champagne/60"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.9, delay: 0.75, ease: EASE_OUT }}
-              />
+              </span>
+              <span aria-hidden className="intro-rule h-px flex-1 origin-left bg-champagne/60" />
             </span>
 
-            <motion.span
-              className="mt-6 font-sans text-[0.5625rem] uppercase tracking-[0.3em] text-ash/70"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1.1, ease: EASE_OUT }}
+            <span
+              className="intro-fade mt-6 font-sans text-[0.5625rem] uppercase tracking-[0.3em] text-ash"
+              style={{ "--d": "1s" } as React.CSSProperties}
             >
               {dict.hero.eyebrow}
-            </motion.span>
+            </span>
           </motion.div>
 
-          <motion.span
-            className="absolute bottom-8 font-sans text-[0.5625rem] uppercase tracking-[0.28em] text-ash"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: effective === "exit" ? 0 : 1 }}
-            transition={{ duration: 0.6, delay: effective === "exit" ? 0 : 1.2 }}
+          <span
+            className={cn(
+              "intro-fade absolute bottom-8 font-sans text-[0.5625rem] uppercase tracking-[0.28em] text-ash transition-opacity duration-300",
+              effective === "exit" && "opacity-0",
+            )}
+            style={{ "--d": "1.1s" } as React.CSSProperties}
           >
             {dict.intro.skip}
-          </motion.span>
+          </span>
         </motion.div>
       )}
     </AnimatePresence>
