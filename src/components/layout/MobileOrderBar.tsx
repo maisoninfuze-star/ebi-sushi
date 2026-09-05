@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 
 import { IconPhone, IconCalendar, IconCart, IconArrowRight } from "@/components/ui/Icons";
 import { useCart } from "@/components/cart/CartProvider";
@@ -27,7 +27,7 @@ export function MobileOrderBar() {
     <div className="fixed inset-x-0 bottom-0 z-40 lg:hidden">
       <AnimatePresence mode="wait" initial={false}>
         {showCartSummary ? (
-          <motion.div
+          <m.div
             key="cart"
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
@@ -53,9 +53,9 @@ export function MobileOrderBar() {
                 </span>
               </button>
             </div>
-          </motion.div>
+          </m.div>
         ) : (
-          <motion.nav
+          <m.nav
             key="actions"
             aria-label="Actions rapides"
             initial={{ y: "100%" }}
@@ -99,7 +99,7 @@ export function MobileOrderBar() {
                 </Link>
               </li>
             </ul>
-          </motion.nav>
+          </m.nav>
         )}
       </AnimatePresence>
     </div>

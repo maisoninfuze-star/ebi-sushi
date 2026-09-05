@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, m, useReducedMotion } from "motion/react";
 
 import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -94,7 +94,7 @@ export function Gallery() {
       {/* ── Visionneuse ─────────────────────────────────────────────────── */}
       <AnimatePresence>
         {isOpen && active && (
-          <motion.div
+          <m.div
             ref={dialogRef}
             role="dialog"
             aria-modal="true"
@@ -123,7 +123,7 @@ export function Gallery() {
 
             <div className="relative flex flex-1 items-center justify-center overflow-hidden px-4 pb-4 sm:px-16">
               <AnimatePresence mode="wait">
-                <motion.figure
+                <m.figure
                   key={active.src}
                   initial={reduced ? undefined : { opacity: 0, scale: 0.985 }}
                   animate={reduced ? undefined : { opacity: 1, scale: 1 }}
@@ -144,7 +144,7 @@ export function Gallery() {
                   <figcaption className="max-w-[60ch] text-center font-sans text-xs leading-relaxed text-ash">
                     {active.alt}
                   </figcaption>
-                </motion.figure>
+                </m.figure>
               </AnimatePresence>
 
               <button
@@ -164,7 +164,7 @@ export function Gallery() {
                 <IconArrowRight className="size-6" />
               </button>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </section>

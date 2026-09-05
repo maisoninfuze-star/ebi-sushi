@@ -11,7 +11,7 @@ import {
   useSyncExternalStore,
   type ReactNode,
 } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
@@ -163,7 +163,7 @@ export function IntroOverlay() {
   return (
     <AnimatePresence>
       {effective !== "done" && (
-        <motion.div
+        <m.div
           data-intro-overlay
           aria-hidden="true"
           onClick={skip}
@@ -175,7 +175,7 @@ export function IntroOverlay() {
           {/* Bord inférieur du rideau : un fin filet champagne, comme une lame. */}
           <span aria-hidden className="absolute inset-x-0 bottom-0 h-px bg-champagne/40" />
 
-          <motion.div
+          <m.div
             className="flex flex-col items-center"
             animate={effective === "exit" ? { opacity: 0, y: -24 } : { opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: EASE_OUT }}
@@ -208,7 +208,7 @@ export function IntroOverlay() {
             >
               {dict.hero.eyebrow}
             </span>
-          </motion.div>
+          </m.div>
 
           <span
             className={cn(
@@ -219,7 +219,7 @@ export function IntroOverlay() {
           >
             {dict.intro.skip}
           </span>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

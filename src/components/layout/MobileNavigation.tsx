@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 
 import { Logo } from "@/components/ui/Logo";
 import { IconClose, IconPhone, IconInstagram, IconFacebook } from "@/components/ui/Icons";
@@ -32,7 +32,7 @@ export function MobileNavigation({ open, onClose }: { open: boolean; onClose: ()
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
+        <m.div
           ref={panelRef}
           role="dialog"
           aria-modal="true"
@@ -68,7 +68,7 @@ export function MobileNavigation({ open, onClose }: { open: boolean; onClose: ()
               {mainNav.map((link, i) => {
                 const active = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
                 return (
-                  <motion.li
+                  <m.li
                     key={link.href}
                     initial={{ opacity: 0, y: 18 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -100,13 +100,13 @@ export function MobileNavigation({ open, onClose }: { open: boolean; onClose: ()
                         {String(i + 1).padStart(2, "0")}
                       </span>
                     </Link>
-                  </motion.li>
+                  </m.li>
                 );
               })}
             </ul>
 
             {/* Contact et réseaux */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.36 }}
@@ -147,7 +147,7 @@ export function MobileNavigation({ open, onClose }: { open: boolean; onClose: ()
                   <IconFacebook className="size-[1.15rem]" />
                 </a>
               </div>
-            </motion.div>
+            </m.div>
           </nav>
 
           {/* Actions permanentes */}
@@ -169,7 +169,7 @@ export function MobileNavigation({ open, onClose }: { open: boolean; onClose: ()
               </Link>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

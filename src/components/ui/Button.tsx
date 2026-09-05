@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRef, type ButtonHTMLAttributes, type ReactNode } from "react";
-import { motion, useMotionValue, useSpring, useReducedMotion } from "motion/react";
+import { m, useMotionValue, useSpring, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 type Variant = "primary" | "outline" | "ghost" | "quiet";
@@ -93,7 +93,7 @@ export function Button(props: ButtonProps | LinkProps) {
 
     if (!enabled) return anchor;
     return (
-      <motion.span
+      <m.span
         ref={ref}
         className="inline-block"
         style={{ x: sx, y: sy }}
@@ -101,7 +101,7 @@ export function Button(props: ButtonProps | LinkProps) {
         onMouseLeave={onLeave}
       >
         {anchor}
-      </motion.span>
+      </m.span>
     );
   }
 
@@ -116,7 +116,7 @@ export function Button(props: ButtonProps | LinkProps) {
 
   if (!enabled) return button;
   return (
-    <motion.span
+    <m.span
       ref={ref}
       className="inline-block"
       style={{ x: sx, y: sy }}
@@ -124,6 +124,6 @@ export function Button(props: ButtonProps | LinkProps) {
       onMouseLeave={onLeave}
     >
       {button}
-    </motion.span>
+    </m.span>
   );
 }

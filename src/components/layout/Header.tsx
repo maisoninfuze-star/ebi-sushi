@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 
 import { Logo } from "@/components/ui/Logo";
 import { IconCart, IconMenu } from "@/components/ui/Icons";
@@ -125,7 +125,7 @@ export function Header() {
                 <IconCart className="size-[1.35rem]" />
                 <AnimatePresence>
                   {hydrated && count > 0 && (
-                    <motion.span
+                    <m.span
                       initial={{ scale: 0.4, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       exit={{ scale: 0.4, opacity: 0 }}
@@ -133,7 +133,7 @@ export function Header() {
                       className="absolute right-1 top-1.5 flex min-w-[1.15rem] items-center justify-center rounded-full bg-vermilion px-1 font-sans text-[0.625rem] font-semibold leading-[1.15rem] text-ivory"
                     >
                       {count}
-                    </motion.span>
+                    </m.span>
                   )}
                 </AnimatePresence>
               </button>

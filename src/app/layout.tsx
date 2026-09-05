@@ -8,6 +8,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileOrderBar } from "@/components/layout/MobileOrderBar";
 import { Grain } from "@/components/ui/Grain";
+import { MotionProvider } from "@/components/ui/MotionProvider";
 import { IntroProvider, IntroOverlay } from "@/components/layout/Intro";
 import { INTRO_STORAGE_KEY } from "@/lib/intro";
 import { RestaurantSchema } from "@/components/seo/StructuredData";
@@ -104,6 +105,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {dict.nav.skipToContent}
         </a>
 
+        <MotionProvider>
         <IntroProvider>
           <CartProvider>
             <Header />
@@ -114,6 +116,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </CartProvider>
           <IntroOverlay />
         </IntroProvider>
+        </MotionProvider>
 
         <Grain />
         <RestaurantSchema />

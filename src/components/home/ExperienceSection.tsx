@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
+import { m, useScroll, useTransform, useReducedMotion } from "motion/react";
 
 import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import { RevealText, Reveal } from "@/components/ui/Reveal";
@@ -25,7 +25,7 @@ export function ExperienceSection() {
       className="relative flex min-h-[38rem] items-center overflow-hidden bg-ink py-28 lg:min-h-[44rem]"
       aria-labelledby="experience-titre"
     >
-      <motion.div className="absolute inset-0 -z-10" style={reduced ? undefined : { y, scale: 1.12 }}>
+      <m.div className="absolute inset-0 -z-10" style={reduced ? undefined : { y, scale: 1.12 }}>
         <OptimizedImage
           src="/images/salle-restaurant-ambiance.jpg"
           alt="Salle du restaurant Ebi Sushi à El Jadida, éclairage tamisé"
@@ -35,7 +35,7 @@ export function ExperienceSection() {
           wrapperClassName="size-full"
           className="object-cover"
         />
-      </motion.div>
+      </m.div>
 
       <div aria-hidden className="absolute inset-0 -z-10 bg-ink/72" />
       <div

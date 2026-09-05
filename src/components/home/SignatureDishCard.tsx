@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { m, useReducedMotion } from "motion/react";
 
 import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import { IconPlus, IconCheck, IconLeaf, IconFlame } from "@/components/ui/Icons";
@@ -27,7 +27,7 @@ export function SignatureDishCard({
   return (
     <article className={cn("group flex flex-col", className)}>
       <div className="relative overflow-hidden">
-        <motion.div
+        <m.div
           whileHover={reduced ? undefined : { scale: 1.045 }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
           className="origin-center"
@@ -43,7 +43,7 @@ export function SignatureDishCard({
             wrapperClassName="aspect-[4/3] w-full"
             className="size-full object-cover"
           />
-        </motion.div>
+        </m.div>
 
         {/* Voile permettant au prix de rester lisible sur toute photo. */}
         <div

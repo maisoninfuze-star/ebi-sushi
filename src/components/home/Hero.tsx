@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 
 import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import { Button } from "@/components/ui/Button";
@@ -105,6 +105,7 @@ export function Hero() {
           alt=""
           fill
           priority
+          fetchPriority="high"
           instant
           quality={58}
           sizes="(min-width: 1024px) 50vw, 100vw"
@@ -141,14 +142,14 @@ export function Hero() {
           "lg:absolute lg:inset-y-0 lg:left-1/2 lg:right-0 lg:justify-center lg:px-12 lg:pb-28 lg:pt-28",
         )}
       >
-        <motion.p
+        <m.p
           className="eyebrow"
           initial={reduced ? undefined : { opacity: 0, y: 12 }}
           animate={!play ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.3, ease: EASE }}
         >
           {t.eyebrow}
-        </motion.p>
+        </m.p>
 
         <h1 className="mt-4 font-display font-light uppercase leading-[0.86] tracking-[0.06em] text-ivory lg:mt-8">
           <span className="sr-only">Ebi Sushi — {t.title}</span>
@@ -157,7 +158,7 @@ export function Hero() {
                 (pas de fondu ni de masque) et ne fait que se poser — le LCP
                 n'attend pas la fin de l'intro. */}
             {t.wordmark.map((line, i) => (
-              <motion.span
+              <m.span
                 key={line}
                 className={cn(
                   "block text-[clamp(3.25rem,15vw,6rem)] lg:text-[clamp(6rem,11.5vw,13.5rem)]",
@@ -168,22 +169,22 @@ export function Hero() {
                 transition={{ duration: 1.1, delay: 0.1 + i * 0.1, ease: EASE }}
               >
                 {line}
-              </motion.span>
+              </m.span>
             ))}
           </span>
         </h1>
 
-        <motion.p
+        <m.p
           className="mt-4 hidden max-w-[24ch] font-display text-2xl font-light italic leading-snug text-ivory/85 lg:mt-7 lg:block lg:text-3xl"
           initial={reduced ? undefined : { opacity: 0, y: 12 }}
           animate={!play ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.85, ease: EASE }}
         >
           {t.title}
-        </motion.p>
+        </m.p>
 
         {/* Les deux appels à l'action — sur mobile, la barre fixe en bas d'écran s'en charge. */}
-        <motion.div
+        <m.div
           className="absolute inset-x-0 bottom-0 hidden items-center justify-center gap-4 pb-12 lg:flex"
           initial={reduced ? undefined : { opacity: 0, y: 16 }}
           animate={!play ? undefined : { opacity: 1, y: 0 }}
@@ -195,7 +196,7 @@ export function Hero() {
           <Button href="/reservation" variant="outline" size="lg" magnetic>
             {t.secondaryCta}
           </Button>
-        </motion.div>
+        </m.div>
       </div>
 
       {/* ── Carrousel de plats ──────────────────────────────────────────────── */}
@@ -209,7 +210,7 @@ export function Hero() {
         )}
       >
         {/* Fenêtre Embla */}
-        <motion.div
+        <m.div
           ref={emblaRef}
           className="w-full shrink-0 overflow-hidden"
           initial={reduced ? undefined : { y: 32 }}
@@ -247,6 +248,7 @@ export function Hero() {
                         alt={alt}
                         fill
                         priority={i === 0}
+                        fetchPriority={i === 0 ? "high" : undefined}
                         instant={i === 0}
                         quality={72}
                         sizes="(min-width: 1024px) 24rem, 72vw"
@@ -291,7 +293,7 @@ export function Hero() {
               );
             })}
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Flèches — aux bords du panneau, à mi-hauteur */}
         <button

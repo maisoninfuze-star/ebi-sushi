@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { m, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -22,7 +22,7 @@ export function Reveal({
   as?: "div" | "section" | "li" | "article" | "figure";
 }) {
   const reduced = useReducedMotion();
-  const Component = motion[as];
+  const Component = m[as];
 
   return (
     <Component
@@ -64,7 +64,7 @@ export function RevealText({
   // texte masqué n'est pas « peint » et repousserait le LCP. Il se pose sans masque.
   if (Tag === "h1") {
     return (
-      <motion.h1
+      <m.h1
         className={className}
         initial={{ y: 22 }}
         whileInView={{ y: 0 }}
@@ -72,7 +72,7 @@ export function RevealText({
         transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
       >
         {text}
-      </motion.h1>
+      </m.h1>
     );
   }
 
@@ -94,7 +94,7 @@ export function RevealText({
               marginBottom: "-0.14em",
             }}
           >
-            <motion.span
+            <m.span
               className="inline-block"
               initial={{ y: "108%" }}
               whileInView={{ y: 0 }}
@@ -106,7 +106,7 @@ export function RevealText({
               }}
             >
               {word}
-            </motion.span>
+            </m.span>
             {i < words.length - 1 && " "}
           </span>
         ))}
@@ -120,7 +120,7 @@ export function RevealRule({ className, delay = 0 }: { className?: string; delay
   const reduced = useReducedMotion();
 
   return (
-    <motion.span
+    <m.span
       aria-hidden
       className={cn("block h-px origin-left bg-champagne/30", className)}
       initial={reduced ? undefined : { scaleX: 0 }}

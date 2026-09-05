@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 
 import { TextField, TextAreaField, SelectField } from "@/components/ui/Field";
 import { IconCheck, IconWhatsApp, IconPhone } from "@/components/ui/Icons";
@@ -108,7 +108,7 @@ export function ReservationForm({ compact = false }: { compact?: boolean }) {
 
   if (status === "success") {
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -145,7 +145,7 @@ export function ReservationForm({ compact = false }: { compact?: boolean }) {
             {business.phone.display}
           </a>
         </div>
-      </motion.div>
+      </m.div>
     );
   }
 
@@ -255,7 +255,7 @@ export function ReservationForm({ compact = false }: { compact?: boolean }) {
 
       <AnimatePresence>
         {status === "error" && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -273,7 +273,7 @@ export function ReservationForm({ compact = false }: { compact?: boolean }) {
               <IconPhone className="size-4" />
               {business.phone.display}
             </a>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 

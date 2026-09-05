@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRef, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 
 import { useCart } from "@/components/cart/CartProvider";
 import { QuantityStepper } from "@/components/cart/QuantityStepper";
@@ -90,7 +90,7 @@ export function CartDrawer() {
     <AnimatePresence>
       {cart.isOpen && (
         <>
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -100,7 +100,7 @@ export function CartDrawer() {
             aria-hidden
           />
 
-          <motion.aside
+          <m.aside
             ref={panelRef}
             role="dialog"
             aria-modal="true"
@@ -397,7 +397,7 @@ export function CartDrawer() {
                 </div>
               </div>
             )}
-          </motion.aside>
+          </m.aside>
         </>
       )}
     </AnimatePresence>

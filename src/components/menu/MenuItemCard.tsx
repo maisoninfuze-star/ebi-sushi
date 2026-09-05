@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { m, useReducedMotion } from "motion/react";
 
 import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import { IconPlus, IconCheck, IconLeaf, IconFlame, IconStar } from "@/components/ui/Icons";
@@ -35,10 +35,12 @@ export function MenuItemCard({
   const tags = (item.tags ?? []).filter((t) => t in TAG_META).slice(0, 2);
 
   return (
-    <motion.article
+    <m.article
       layout={false}
-      initial={reduced ? undefined : { opacity: 0, y: 14 }}
-      animate={{ opacity: 1, y: 0 }}
+      // Montée seule, sans fondu : les cartes sont visibles avant l'hydratation
+      // et le titre de page n'est pas le seul texte compté pour le LCP.
+      initial={reduced ? undefined : { y: 14 }}
+      animate={{ y: 0 }}
       transition={{ duration: 0.45, delay: Math.min(index, 8) * 0.03, ease: [0.16, 1, 0.3, 1] }}
       className="group relative flex h-full flex-col border border-ivory/[0.08] bg-charcoal transition-colors duration-500 hover:border-ivory/20"
     >
@@ -129,6 +131,6 @@ export function MenuItemCard({
           <span className="sr-only"> — {item.name}</span>
         </button>
       </div>
-    </motion.article>
+    </m.article>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { locales } from "@/config/site";
 import { dict } from "@/i18n/fr";
 import { useEscapeKey } from "@/lib/hooks";
@@ -50,7 +50,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
 
       <AnimatePresence>
         {open && (
-          <motion.ul
+          <m.ul
             role="menu"
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
@@ -84,7 +84,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
                 </button>
               </li>
             ))}
-          </motion.ul>
+          </m.ul>
         )}
       </AnimatePresence>
     </div>

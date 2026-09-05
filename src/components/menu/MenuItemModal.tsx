@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 
 import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import { QuantityStepper } from "@/components/cart/QuantityStepper";
@@ -150,7 +150,7 @@ export function MenuItemModal({ item, onClose }: { item: MenuItem | null; onClos
     <AnimatePresence>
       {open && item && (
         <>
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -160,7 +160,7 @@ export function MenuItemModal({ item, onClose }: { item: MenuItem | null; onClos
             className="fixed inset-0 z-[80] bg-ink/78 backdrop-blur-sm"
           />
 
-          <motion.div
+          <m.div
             ref={panelRef}
             role="dialog"
             aria-modal="true"
@@ -191,7 +191,7 @@ export function MenuItemModal({ item, onClose }: { item: MenuItem | null; onClos
             </button>
 
             <ItemPanel key={item.id} item={item} onClose={onClose} />
-          </motion.div>
+          </m.div>
         </>
       )}
     </AnimatePresence>

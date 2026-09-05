@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
+import { m, useScroll, useTransform, useReducedMotion } from "motion/react";
 
 import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import { RevealText, Reveal, RevealRule } from "@/components/ui/Reveal";
@@ -34,7 +34,7 @@ export function StorySection() {
         <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
           {/* Images */}
           <div className="relative lg:col-span-6">
-            <motion.div style={reduced ? undefined : { y: mainY }}>
+            <m.div style={reduced ? undefined : { y: mainY }}>
               <OptimizedImage
                 src="/images/atelier-preparation-saumon.jpg"
                 alt="Couteau japonais et longe de saumon en cours de découpe dans la cuisine d'Ebi Sushi"
@@ -45,10 +45,10 @@ export function StorySection() {
                 wrapperClassName="aspect-4/5 w-full max-w-[34rem]"
                 className="size-full object-cover"
               />
-            </motion.div>
+            </m.div>
 
             {/* Détail rapproché, en débord — crée la profondeur. */}
-            <motion.div
+            <m.div
               style={reduced ? undefined : { y: detailY }}
               className="absolute -bottom-10 right-0 w-[38%] max-w-[13rem] sm:-bottom-14 sm:w-[34%] lg:-right-10"
             >
@@ -62,7 +62,7 @@ export function StorySection() {
                 wrapperClassName="aspect-square w-full border-4 border-charcoal sm:border-8"
                 className="size-full object-cover"
               />
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Texte */}
